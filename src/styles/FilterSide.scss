@@ -1,0 +1,19 @@
+.cancel {
+    margin: 20px auto 30px;
+    width: 100%;
+
+    h5 {
+        border: 1px #282c34 solid;
+        text-align: center;
+        width: 180px;
+        margin: 0 auto;
+        border-radius: 10px;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            background: 61dafb;
+            border-color: #61dafb;
+        }
+    }
+}

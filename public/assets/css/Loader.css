@@ -1,0 +1,58 @@
+/* Loader */
+.loader {
+    position: fixed;
+    background: #fff;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: left 0.4s ease-in-out;
+}
+
+.loader img {
+    width: 90px;
+    height: 90px;
+}
+
+.fondu-out {
+    left: -102%;
+    opacity: 0;
+}
+
+.loader .img {
+    width: 20px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 10px;
+    animation: loader infinite 0.25s alternate;
+}
+
+.loader .img2 {
+    animation-delay: 50ms;
+}
+
+.loader .img3 {
+    animation-delay: 0.1s;
+}
+
+.loader .img4 {
+    animation-delay: 0.15s;
+}
+
+.loader .img5 {
+    animation-delay: 0.2s;
+}
+
+.loader .img6 {
+    animation-delay: 0.25s;
+}
+
+@keyframes loader {
+    100% {
+        transform: translateY(-30px);
+    }
+}

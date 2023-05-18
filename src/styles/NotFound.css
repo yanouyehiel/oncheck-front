@@ -1,0 +1,13 @@
+div.not-found {
+  display: block;
+  align-items: center;
+  justify-content: center;
+}
+
+div.not-found a.link {
+  text-decoration: none;
+  font-size: large;
+  color: aliceblue;
+  border: 1 px solid blue;
+  background-color: blue;
+}/*# sourceMappingURL=NotFound.css.map */
