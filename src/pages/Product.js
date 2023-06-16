@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect, useState, useMemo } from 'react';
-import { useParams } from 'react-router';
+import { useEffect, useState, useMemo, useParams } from 'react';
+//import { useParams } from 'react-router';
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
 import Footer from "../components/Footer";
