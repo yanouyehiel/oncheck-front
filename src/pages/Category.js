@@ -1,11 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import Header from "../components/Header";
 import FilterSide from "../components/FilterSide";
 import Footer from "../components/Footer";
-import { NavLink } from "react-router-dom";
 
 const Category = () => {
     const { id } = useParams()
