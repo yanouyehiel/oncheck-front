@@ -10,26 +10,34 @@ import Privacy from "./pages/Privacy";
 import Faqs from "./pages/Faqs";
 import Terms from "./pages/Terms";
 import Search from "./pages/Search";
+import { hasAuthenticated } from "./services/AuthApi";
+import { useState } from "react";
+import Auth from "./contexts/Auth";
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
+  
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/category" element={<Category />}></Route>
-        <Route path="/product/:id" element={<Product />}></Route>
-        <Route path="/product" element={<Product />}></Route>
-        <Route path="/search/:keyword" element={<Search />}></Route>
-        <Route path="/about-us" element={<About />}></Route>
-        <Route path="/help" element={<Help />}></Route>
-        <Route path="/contact-us" element={<ContactUs />}></Route>
-        <Route path="/privacy" element={<Privacy />}></Route>
-        <Route path="/faqs" element={<Faqs />}></Route>
-        <Route path="/terms" element={<Terms />}></Route>
-        <Route path="/*" element={<NotFound />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Auth.Provider value={{isAuthenticated, setIsAuthenticated}}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/category/:id" element={<Category />}></Route>
+          <Route path="/product/:id" element={<Product />}></Route>
+          <Route path="/product" element={<Product />}></Route>
+          <Route path="/search/:keyword" element={<Search />}></Route>
+          <Route path="/about-us" element={<About />}></Route>
+          <Route path="/help" element={<Help />}></Route>
+          <Route path="/contact-us" element={<ContactUs />}></Route>
+          <Route path="/privacy" element={<Privacy />}></Route>
+          <Route path="/faqs" element={<Faqs />}></Route>
+          <Route path="/terms" element={<Terms />}></Route>
+          <Route path="/*" element={<NotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </Auth.Provider>
   );
 }
 

@@ -2,6 +2,12 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log('Test Newsletter');
+    }
+
     return (
         <>
             {/* Middle section */}
@@ -89,22 +95,22 @@ const Footer = () => {
                                 <h3 class="text-white font-weight-bold mb-3">Categories</h3>
                                 <ul>
                                     <li class="mb-3">
-                                        <a href="product.html">Mobiles </a>
+                                        <a href="/">Electronique </a>
                                     </li>
                                     <li class="mb-3">
-                                        <a href="product.html">Computers</a>
+                                        <a href="/">Electroménager</a>
                                     </li>
                                     <li class="mb-3">
-                                        <a href="product.html">TV, Audio</a>
+                                        <a href="/">Beauté & Santé</a>
                                     </li>
                                     <li class="mb-3">
-                                        <a href="product2.html">Smartphones</a>
+                                        <a href="/">Mode</a>
                                     </li>
                                     <li class="mb-3">
-                                        <a href="product.html">Washing Machines</a>
+                                        <a href="/">Alimentation</a>
                                     </li>
                                     <li>
-                                        <a href="product2.html">Refrigerators</a>
+                                        <a href="/">Intérieur & Design</a>
                                     </li>
                                 </ul>
                             </div>
@@ -153,9 +159,9 @@ const Footer = () => {
                             <div class="col-md-3 col-sm-6 footer-grids w3l-agileits mt-md-0 mt-4">
                                 <h3 class="text-white font-weight-bold mb-3">Newsletter</h3>
                                 <p class="mb-3">Rejoignez-nous et bénéficiez de conseils pour acheter des produits au bon prix et trouver des produits bien cotés</p>
-                                <form action="#" method="post">
+                                <form onSubmit={handleSubmit}>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email" name="email" required="" />
+                                        <input type="email" class="form-control" placeholder="Email" name="email" required />
                                         <input type="submit" value="Go" />
                                     </div>
                                 </form>
@@ -188,206 +194,128 @@ const Footer = () => {
                 <div class="agile-sometext py-md-5 py-sm-4 py-3">
                     <div class="container">
                         <div class="sub-some">
-                            <h5 class="font-weight-bold mb-2">Mobile & Tablets :</h5>
+                            <h5 class="font-weight-bold mb-2">Electronique</h5>
                             <ul>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Android Phones</a>
+                                    <a href="/" class="border-right pr-2">Téléphones mobiles</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Smartphones</a>
+                                    <a href="/" class="border-right pr-2">Accessoires pour téléphones</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Feature Phones</a>
+                                    <a href="/" class="border-right pr-2">Tablettes</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Unboxed Phones</a>
+                                    <a href="/" class="border-right pr-2">Ordinateurs</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Refurbished Phones</a>
+                                    <a href="/" class="border-right pr-2">Accessoires pour ordinateurs</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2"> Tablets</a>
+                                    <a href="/" class="border-right pr-2">Jeux Vidéo</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">CDMA Phones</a>
+                                    <a href="/" class="border-right pr-2">Accessoires pour jeux vidéo</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Value Added Services</a>
+                                    <a href="/" class="border-right pr-2">Accessoires informatiques</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Sell Old</a>
+                                    <a href="/" class="border-right pr-2">Appareils électriques</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Used Mobiles</a>
+                                    <a href="/" class="border-right pr-2">Télécommunication</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="sub-some mt-4">
-                            <h5 class="font-weight-bold mb-2">Computers :</h5>
+                            <h5 class="font-weight-bold mb-2">Electroménager</h5>
                             <ul>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Laptops </a>
+                                    <a href="/" class="border-right pr-2">Gros Electroménager </a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Printers</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Routers</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Ink & Toner Cartridges</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Monitors</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Video Games</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Unboxed & Refurbished Laptops</a>
-                                </li>
-                                <li>
-                                    <a href="product.html" class="border-right pr-2">Assembled Desktops</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Data Cards</a>
+                                    <a href="/" class="border-right pr-2">Petit Electroménager</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="sub-some mt-4">
-                            <h5 class="font-weight-bold mb-2">TV, Audio & Large Appliances :</h5>
+                            <h5 class="font-weight-bold mb-2">Beauté & Santé</h5>
                             <ul>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">TVs & DTH</a>
+                                    <a href="/" class="border-right pr-2">Lotions</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Home Theatre Systems</a>
+                                    <a href="/" class="border-right pr-2">Senteurs</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Hidden Cameras & CCTVs</a>
+                                    <a href="/" class="border-right pr-2">Accessoires de beauté</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Refrigerators</a>
+                                    <a href="/" class="border-right pr-2">Appareils de beauté</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Washing Machines</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2"> Air Conditioners</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Cameras</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Speakers</a>
+                                    <a href="/" class="border-right pr-2">Médécine</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="sub-some mt-4">
-                            <h5 class="font-weight-bold mb-2">Mobile & Laptop Accessories :</h5>
+                            <h5 class="font-weight-bold mb-2">Mode</h5>
                             <ul>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Headphones</a>
+                                    <a href="/" class="border-right pr-2">Vêtements pour hommes</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Power Banks </a>
+                                    <a href="/" class="border-right pr-2">Vêtements pour femmes</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Backpacks</a>
+                                    <a href="/" class="border-right pr-2">Vêtements mixtes</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Mobile Cases & Covers</a>
+                                    <a href="/" class="border-right pr-2">Accessoires</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Pen Drives</a>
+                                    <a href="/" class="border-right pr-2">Chaussures pour hommes</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">External Hard Disks</a>
+                                    <a href="/" class="border-right pr-2">Chaussures pour femmes</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2"> Mouse</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Smart Watches & Fitness Bands</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">MicroSD Cards</a>
+                                    <a href="/" class="border-right pr-2"> Bijoux</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="sub-some mt-4">
-                            <h5 class="font-weight-bold mb-2">Appliances :</h5>
+                            <h5 class="font-weight-bold mb-2">Alimentation</h5>
                             <ul>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Trimmers</a>
+                                    <a href="/" class="border-right pr-2">Vins</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Hair Dryers</a>
+                                    <a href="/" class="border-right pr-2">Whisky</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Emergency Lights</a>
+                                    <a href="/" class="border-right pr-2">Bières</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Water Purifiers </a>
+                                    <a href="/" class="border-right pr-2">Jus gazeux</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Electric Kettles</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Hair Straighteners</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Induction Cooktops</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Sewing Machines</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2"> Geysers</a>
+                                    <a href="/" class="border-right pr-2">Jus naturel</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="sub-some mt-4">
-                            <h5 class="font-weight-bold mb-2">Popular on Electro Store</h5>
+                            <h5 class="font-weight-bold mb-2">Intérieur & Design</h5>
                             <ul>
                                 <li class="m-sm-1">
-                                    <a href="product.html" class="border-right pr-2">Offers & Coupons</a>
+                                    <a href="/" class="border-right pr-2">Mobilier d'intérieur</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Couple Watches</a>
+                                    <a href="/" class="border-right pr-2">Installation d'intérieur</a>
                                 </li>
                                 <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Gas Stoves</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2"> Air Coolers</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Air Purifiers</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Headphones</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2"> Headsets</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Pressure Cookers</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Sandwich Makers</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Air Friers</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Irons</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">LED TV</a>
-                                </li>
-                                <li class="m-sm-1">
-                                    <a href="product2.html" class="border-right pr-2">Sandwich Makers</a>
+                                    <a href="/" class="border-right pr-2">Ustensiles de cuisine</a>
                                 </li>
                             </ul>
                         </div>
@@ -426,6 +354,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
+            
             {/* Copyright */}
             <div class="copy-right py-3">
                 <div class="container">

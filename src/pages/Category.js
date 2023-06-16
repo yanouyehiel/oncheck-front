@@ -1,10 +1,35 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import Header from "../components/Header";
 import FilterSide from "../components/FilterSide";
 import Footer from "../components/Footer";
 import { NavLink } from "react-router-dom";
 
 const Category = () => {
+    const { id } = useParams()
+    const [produits, setProduits] = useState([])
+    const [categorie, setCategorie] = useState("")
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:8000/api/categorie-produit/' + id
+            )
+            .then((res) => {
+                setCategorie(res.data.data)
+            }
+        );
+        axios
+            .get('http://localhost:8000/api/produits-categorie/' + id
+            )
+            .then((res) => {
+                setProduits(res.data.data)
+                console.log(produits)
+            }
+        );
+    }, [id])
+
     return (
         <>
             <Header />
@@ -20,7 +45,7 @@ const Category = () => {
                                 <NavLink to="/">Accueil</NavLink>
                                 <i>|</i>
                             </li>
-                            <li>Electronics</li>
+                            <li>{categorie.nom}</li>
                         </ul>
                     </div>
                 </div>

@@ -1,8 +1,32 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { NavLink } from 'react-router-dom';
+import axios from "axios";
+import { useState } from "react";
 
 const ContactUs = () => {
+    const [nom, setNom] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        axios
+            .post('http://localhost:8000/api/send-message', {
+                nom: nom,
+                email: email,
+                message: message
+            })
+            .then(() => {
+                console.log('reussi')
+            })
+            .catch(() => {
+                console.log('erreur')
+            })
+        ;
+    }
+
     return(
         <>
             <Header />
@@ -67,21 +91,21 @@ const ContactUs = () => {
                             </div>
                         </div>
                     </div>
-                    <form action="#" method="post">
+                    <form onSubmit={handleSubmit}>
                         <div class="contact-grids1 w3agile-6">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 contact-form1 form-group">
                                     <label class="col-form-label">Nom</label>
-                                    <input type="text" class="form-control" name="Name" placeholder="" required="" />
+                                    <input type="text" class="form-control" onChange={(e) => setNom(e.target.value)} required />
                                 </div>
                                 <div class="col-md-6 col-sm-6 contact-form1 form-group">
                                     <label class="col-form-label">E-mail</label>
-                                    <input type="email" class="form-control" name="Email" placeholder="" required="" />
+                                    <input type="email" class="form-control" onChange={(e) => setEmail(e.target.value)} required />
                                 </div>
                             </div>
                             <div class="contact-me animated wow slideInUp form-group">
                                 <label class="col-form-label">Message</label>
-                                <textarea name="Message" class="form-control" placeholder="" required=""> </textarea>
+                                <textarea onChange={(e) => setMessage(e.target.value)} class="form-control" required></textarea>
                             </div>
                             <div class="contact-form">
                                 <input type="submit" value="Envoyer" />

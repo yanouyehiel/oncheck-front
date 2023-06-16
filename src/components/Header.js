@@ -1,12 +1,16 @@
 /* eslint-disable no-undef */
-import React from "react";
+import React, { useContext } from "react";
 import Login from "./Login";
 import Navbar from "./Navbar";
 import Register from "./Register";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Auth from "../contexts/Auth";
+import { NavLink } from "react-router-dom";
+import { logout } from "../services/AuthApi";
 
 const Header = () => {
+    const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
     let navigate = useNavigate()
     const [produitSearch, setProduitSearch] = useState('')
 
@@ -14,6 +18,11 @@ const Header = () => {
         e.preventDefault()
         navigate("/search/" + produitSearch)
         setProduitSearch('')
+    }
+
+    const handleLogout = () => {
+        logout();
+        setIsAuthenticated(false);
     }
 
     return (
@@ -34,19 +43,36 @@ const Header = () => {
                                 <li className="text-center border-right text-white">
                                     <i className="fas fa-truck mr-2"></i>Livraison
                                 </li>
-                                    <li className="text-center border-right text-white">
-                                        <i className="fas fa-phone mr-2"></i>694 750 509
-                                    </li>
-                                    <li className="text-center border-right text-white">
-                                        <a href="/" data-toggle="modal" data-target="#exampleModal1" className="text-white">
-                                            <i className="fas fa-sign-in-alt mr-2"></i> Connexion 
-                                        </a>
-                                    </li>
-                                    <li className="text-center text-white">
-                                        <a href="/" data-toggle="modal" data-target="#exampleModal2" className="text-white">
-                                            <i className="fas fa-sign-out-alt mr-2"></i>Inscription 
-                                        </a>
-                                    </li>
+                                <li className="text-center border-right text-white">
+                                    <i className="fas fa-phone mr-2"></i>694 750 509
+                                </li>
+                                { (!isAuthenticated && (
+                                    <>
+                                        <li className="text-center border-right text-white">
+                                            <a href="/" data-toggle="modal" data-target="#exampleModal1" className="text-white">
+                                                <i className="fas fa-sign-in-alt mr-2"></i> Connexion 
+                                            </a>
+                                        </li>
+                                        <li className="text-center text-white">
+                                            <a href="/" data-toggle="modal" data-target="#exampleModal2" className="text-white">
+                                                <i className="fas fa-sign-out-alt mr-2"></i>Inscription 
+                                            </a>
+                                        </li>
+                                    </>
+                                )) || (
+                                    <>
+                                        <li className="text-center border-right text-white">
+                                            <NavLink to="/" data-toggle="modal" data-target="#exampleModal1" className="text-white">
+                                                <i className="fas fa-sign-in-alt mr-2"></i> Mon Profile 
+                                            </NavLink>
+                                        </li>
+                                        <li className="text-center text-white">
+                                            <NavLink onClick={handleLogout} data-toggle="modal" data-target="#exampleModal2" className="text-white">
+                                                <i className="fas fa-sign-out-alt mr-2"></i>Deconnexion
+                                            </NavLink>
+                                        </li>
+                                    </>
+                                )}
                             </ul>
                         </div>
                     </div>

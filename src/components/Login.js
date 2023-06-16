@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 //import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Auth from "../contexts/Auth";
+import { login } from "../services/AuthApi";
 
-const Login = () => {
+const Login = ({ history }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async e => {
         e.preventDefault()
         const data = [email, password];
         console.log(data)
+
+        try {
+            const response = await login(data);
+            setIsAuthenticated(response);
+            history.replace('/profile');
+        } catch ({ response }) {
+            console.log(response)
+        }
     }
+
+    useEffect(() => {
+        if (isAuthenticated) {
+           history.replace('/profile'); 
+        }
+    }, [history, isAuthenticated])
 
     return (
         <div className="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-hidden="true">
@@ -23,7 +40,7 @@ const Login = () => {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <form onSubmit={(e) => handleSubmit(e)}>
+                        <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label className="col-form-label">Email</label>
                                 <input type="text" className="form-control" onChange={(e) => setEmail(e.target.value)} required />

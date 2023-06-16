@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import FilterSide from "../components/FilterSide";
 import Header from "../components/Header";
@@ -21,7 +21,7 @@ const Home = () => {
                 .get('http://localhost:8000/api/produits-categorie/62'
                 )
                 .then((res) => {
-                    setMobilePhones(res.data);
+                    setMobilePhones(res.data.data);
                     setPlayOne(false);
                 }
             );
@@ -29,7 +29,7 @@ const Home = () => {
                 .get('http://localhost:8000/api/produits-categorie/1'
                 )
                 .then((res) => {
-                    setLaptops(res.data);
+                    setLaptops(res.data.data);
                     setPlayOne(false);
                 }
             );
@@ -37,7 +37,7 @@ const Home = () => {
                 .get('http://localhost:8000/api/produits-categorie/6'
                 )
                 .then((res) => {
-                    setEcrans(res.data);
+                    setEcrans(res.data.data);
                     setPlayOne(false);
                 }
             );

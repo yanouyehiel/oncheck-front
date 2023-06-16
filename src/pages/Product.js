@@ -17,6 +17,7 @@ Chart.register(CategoryScale);
 const Product = () => {
     const { id } = useParams()
     const [produit, setProduit] = useState({})
+    const [categorie, setCategorie] = useState('')
     const [produitsCompares, setProduitsCompares] = useState([])
     const [chartData, setChartData] = useState({
         labels: Data.map((data) => data.year),
@@ -64,7 +65,35 @@ const Product = () => {
       },
     ],
     [],
-  );
+    );
+    const [alerte, setAlerte] = useState({});
+
+    const nameCategory = (id) => {
+        axios
+            .get('http://localhost:8000/api/categorie/' + id
+            )
+            .then((res) => {
+                setCategorie(res.data.data)
+            }
+        );
+    }
+
+    const alerteSubmit = (e) => {
+        e.preventDefault();
+
+        axios
+            .post('http://localhost:8000/api/alerte-prix', {
+                produit_id: alerte.id,
+                prix_produit: alerte.prix
+            })
+            .then(() => {
+                console.log('reussi')
+            })
+            .catch(() => {
+                console.log('erreur')
+            })
+        ;
+    }
 
     useEffect(() => {
         axios
@@ -75,13 +104,14 @@ const Product = () => {
             }
         );
         axios
-            .get('http://localhost:8000/api/produits-categorie/' + produit.categorie_id
+            .get('http://localhost:8000/api/produits-categorie/' + id
             )
             .then((res) => {
                 setProduitsCompares(res.data)
+                console.log(produitsCompares)
             }
         );
-    }, [id, produit.categorie_id])
+    }, [id, produitsCompares])
 
     return (
         <>
@@ -117,26 +147,36 @@ const Product = () => {
                                         </li>
                                         <li data-thumb="images/{produit.image_2}">
                                             <div class="thumb-image">
-                                                <img src={produit.image_2} data-imagezoom="true" class="img-fluid" alt={produit.image_2} /> </div>
+                                                {
+                                                    produit.image_2 && (
+                                                        <img src={produit.image_2} data-imagezoom="true" class="img-fluid" alt={produit.image_2} />
+                                                    )
+                                                }
+                                            </div>
                                         </li>
                                         <li data-thumb="images/{produit.image_3}">
                                             <div class="thumb-image">
-                                                <img src={produit.image_3} data-imagezoom="true" class="img-fluid" alt={produit.image_3} /> </div>
+                                                {
+                                                    produit.image_3 && (
+                                                        <img src={produit.image_3} data-imagezoom="true" class="img-fluid" alt={produit.image_3} />
+                                                    )
+                                                }
+                                            </div>
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-7 single-right-left simpleCart_shelfItem">
                             <h3 class="mb-3">{produit.nom}</h3>
                             <p class="mb-3">
                                 <span class="item_price">{produit.prix} FCFA</span>
-                                { produit.reduction > 0 && 
+                                { produit.reduction > 0 &&
                                     <del>{ (1 + produit.reduction) * produit.prix }</del>
                                 }
-                                { produit.livraison === 1 && 
+                                { produit.livraison === 1 &&
                                     <label>Livraison possible</label>
                                 }
                             </p>
@@ -146,13 +186,7 @@ const Product = () => {
                                         Description
                                     </li>
                                     <li class="mb-3">
-                                        {produit.description}   
-                                    </li>
-                                    <li class="mb-3">
-                                        EMIs from $655/month.
-                                    </li>
-                                    <li class="mb-3">
-                                        Bank OfferExtra 5% off* with Axis Bank Buzz Credit CardT&C
+                                        <p>{produit.description}</p>
                                     </li>
                                 </ul>
                             </div>
@@ -162,7 +196,7 @@ const Product = () => {
                                     <label>1 Year</label> Garantie</p>
                                 <ul>
                                     <li class="mb-1">
-                                        {produit.description}
+                                        <p>{produit.description}</p>
                                     </li>
                                 </ul>
                                 <p class="my-sm-4 my-3">
@@ -174,8 +208,9 @@ const Product = () => {
 
                             <div class="occasion-cart">
                                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                    <form>
+                                    <form onSubmit={alerteSubmit}>
                                         <fieldset>
+                                            <input type="hidden" value={setAlerte(produit)} />
                                             <input type="submit" value="Alerte-moi sur ce prix" class="button" />
                                         </fieldset>
                                     </form>
