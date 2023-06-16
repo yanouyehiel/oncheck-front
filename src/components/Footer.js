@@ -81,7 +81,7 @@ const Footer = () => {
                                     </div>
                                     <div class="col-8 text-form-footer">
                                         <h3>Meilleur Guide</h3>
-                                        <p>OnCheck est le bon choix pour vous aider</p>
+                                        <p>OnCheck est le meilleur choix pour vous aider</p>
                                     </div>
                                 </div>
                             </div>
@@ -95,22 +95,22 @@ const Footer = () => {
                                 <h3 class="text-white font-weight-bold mb-3">Categories</h3>
                                 <ul>
                                     <li class="mb-3">
-                                        <a href="/">Electronique </a>
+                                        <a href="/categories">Electronique </a>
                                     </li>
                                     <li class="mb-3">
-                                        <a href="/">Electroménager</a>
+                                        <a href="/categories">Electroménager</a>
                                     </li>
                                     <li class="mb-3">
-                                        <a href="/">Beauté & Santé</a>
+                                        <a href="/categories">Beauté & Santé</a>
                                     </li>
                                     <li class="mb-3">
-                                        <a href="/">Mode</a>
+                                        <a href="/categories">Mode</a>
                                     </li>
                                     <li class="mb-3">
-                                        <a href="/">Alimentation</a>
+                                        <a href="/categories">Alimentation</a>
                                     </li>
                                     <li>
-                                        <a href="/">Intérieur & Design</a>
+                                        <a href="/categories">Intérieur & Design</a>
                                     </li>
                                 </ul>
                             </div>
@@ -145,14 +145,10 @@ const Footer = () => {
                                     <li class="mb-3">
                                         <i class="fas fa-mobile"></i> +(237) 694 750 509 </li>
                                     <li class="mb-3">
-                                        <i class="fas fa-phone"></i> +(237) 672 155 866 </li>
+                                        <i class="fas fa-whatsapp"></i> +(237) 672 155 866 </li>
                                     <li class="mb-3">
                                         <i class="fas fa-envelope-open"></i>
-                                        <a href="mail@oncheckcm.com"> mail@oncheckcm.com</a>
-                                    </li>
-                                    <li>
-                                        <i class="fas fa-envelope-open"></i>
-                                        <a href="mailto:ncheck237@gmail.com"> oncheck237@gmail.com</a>
+                                        <a href="mailto:mail@oncheckcm.com"> mail@oncheckcm.com</a>
                                     </li>
                                 </ul>
                             </div>
@@ -191,7 +187,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div class="agile-sometext py-md-5 py-sm-4 py-3">
+                {/* <div class="agile-sometext py-md-5 py-sm-4 py-3">
                     <div class="container">
                         <div class="sub-some">
                             <h5 class="font-weight-bold mb-2">Electronique</h5>
@@ -352,7 +348,7 @@ const Footer = () => {
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </footer>
             
             {/* Copyright */}
