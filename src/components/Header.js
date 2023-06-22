@@ -23,8 +23,9 @@ const Header = () => {
     const handleLogout = () => {
         logout();
         setIsAuthenticated(false);
+        navigate('/')
     }
-
+    console.log(isAuthenticated);
     return (
         <>
             <div className="agile-main-top">
@@ -41,7 +42,9 @@ const Header = () => {
                                     <i className="fas fa-check mr-2"></i>Comparaison
                                 </li>
                                 <li className="text-center border-right text-white">
-                                    <i className="fas fa-truck mr-2"></i>Livraison
+                                    <NavLink to="/acces-marchand" className="text-white">
+                                        <i className="fas fa-truck mr-2"></i>Acces Marchand
+                                    </NavLink>
                                 </li>
                                 <li className="text-center border-right text-white">
                                     <i className="fas fa-phone mr-2"></i>694 750 509
@@ -49,25 +52,45 @@ const Header = () => {
                                 { (!isAuthenticated && (
                                     <>
                                         <li className="text-center border-right text-white">
-                                            <a href="/" data-toggle="modal" data-target="#exampleModal1" className="text-white">
+                                            <NavLink to="/" data-toggle="modal" data-target="#exampleModal1" className="text-white">
                                                 <i className="fas fa-sign-in-alt mr-2"></i> Connexion 
-                                            </a>
+                                            </NavLink>
                                         </li>
                                         <li className="text-center text-white">
-                                            <a href="/" data-toggle="modal" data-target="#exampleModal2" className="text-white">
+                                            <NavLink to="/" data-toggle="modal" data-target="#exampleModal2" className="text-white">
                                                 <i className="fas fa-sign-out-alt mr-2"></i>Inscription 
-                                            </a>
+                                            </NavLink>
+                                        </li>
+                                        <li className="text-center border-right text-white">
+                                            <NavLink to="/profile" className="text-white">
+                                                <i className="fas fa-sign-in-alt mr-2"></i> Mon Profile 
+                                            </NavLink>
+                                        </li>
+                                        <li className="text-center border-right text-white">
+                                            <NavLink to="/my-comparaisons" className="text-white">
+                                                <i className="fas fa-sign-in-alt mr-2"></i> Mes Comparaisons 
+                                            </NavLink>
+                                        </li>
+                                        <li className="text-center text-white">
+                                            <NavLink onClick={handleLogout} className="text-white">
+                                                <i className="fas fa-sign-out-alt mr-2"></i>Deconnexion
+                                            </NavLink>
                                         </li>
                                     </>
                                 )) || (
                                     <>
                                         <li className="text-center border-right text-white">
-                                            <NavLink to="/" data-toggle="modal" data-target="#exampleModal1" className="text-white">
+                                            <NavLink to="/profile" className="text-white">
                                                 <i className="fas fa-sign-in-alt mr-2"></i> Mon Profile 
                                             </NavLink>
                                         </li>
+                                        <li className="text-center border-right text-white">
+                                            <NavLink to="/my-comparaisons" className="text-white">
+                                                <i className="fas fa-sign-in-alt mr-2"></i> Mes Comparaisons 
+                                            </NavLink>
+                                        </li>
                                         <li className="text-center text-white">
-                                            <NavLink onClick={handleLogout} data-toggle="modal" data-target="#exampleModal2" className="text-white">
+                                            <NavLink onClick={handleLogout} className="text-white">
                                                 <i className="fas fa-sign-out-alt mr-2"></i>Deconnexion
                                             </NavLink>
                                         </li>
@@ -86,15 +109,15 @@ const Header = () => {
                 <div className="container">
                     <div className="row header block-header">
                         <div className="col-md-3 logo_agile">
-                            <a href="/" className="font-weight-bold font-italic">
+                            <NavLink to="/" className="font-weight-bold font-italic">
                                 <img src="assets/images/logo-oncheck.png" alt="Logo OnCheck" className="img-logo" />
-                            </a>
+                            </NavLink>
                         </div>
                         <div className="col-md-9 header mt-4 mb-md-0 mb-4">
                             <div className="row">
                                 <div className="col-12 agileits_search">
-                                    <form onSubmit={(e) => search(e)} className="form-inline">
-                                        <input className="form-control mr-sm-2" onChange={() => setProduitSearch(e.target.value)} value={produitSearch} type="search" placeholder="Rechercher un produit..." aria-label="Search" required />
+                                    <form onSubmit={search} className="form-inline">
+                                        <input className="form-control mr-sm-2" onChange={(e) => setProduitSearch(e.target.value)} value={produitSearch} type="text" placeholder="Rechercher un produit..." aria-label="Search" required />
                                         <button className="btn my-2 my-sm-0 btn-search" type="submit">Rechercher</button>
                                     </form>
                                 </div>
