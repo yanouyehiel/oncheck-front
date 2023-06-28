@@ -47,9 +47,11 @@ const Header = () => {
                                     </NavLink>
                                 </li>
                                 <li className="text-center border-right text-white">
-                                    <i className="fas fa-phone mr-2"></i>694 750 509
+                                    <NavLink to="tel:+237694750509" className="text-white">
+                                        <i className="fas fa-phone mr-2"></i>694 750 509
+                                    </NavLink>
                                 </li>
-                                { (!isAuthenticated && (
+                                {!isAuthenticated ? 
                                     <>
                                         <li className="text-center border-right text-white">
                                             <NavLink to="/" data-toggle="modal" data-target="#exampleModal1" className="text-white">
@@ -61,23 +63,8 @@ const Header = () => {
                                                 <i className="fas fa-sign-out-alt mr-2"></i>Inscription 
                                             </NavLink>
                                         </li>
-                                        <li className="text-center border-right text-white">
-                                            <NavLink to="/profile" className="text-white">
-                                                <i className="fas fa-sign-in-alt mr-2"></i> Mon Profile 
-                                            </NavLink>
-                                        </li>
-                                        <li className="text-center border-right text-white">
-                                            <NavLink to="/my-comparaisons" className="text-white">
-                                                <i className="fas fa-sign-in-alt mr-2"></i> Mes Comparaisons 
-                                            </NavLink>
-                                        </li>
-                                        <li className="text-center text-white">
-                                            <NavLink onClick={handleLogout} className="text-white">
-                                                <i className="fas fa-sign-out-alt mr-2"></i>Deconnexion
-                                            </NavLink>
-                                        </li>
                                     </>
-                                )) || (
+                                    : 
                                     <>
                                         <li className="text-center border-right text-white">
                                             <NavLink to="/profile" className="text-white">
@@ -95,7 +82,7 @@ const Header = () => {
                                             </NavLink>
                                         </li>
                                     </>
-                                )}
+                                }
                             </ul>
                         </div>
                     </div>
@@ -118,7 +105,7 @@ const Header = () => {
                                 <div className="col-12 agileits_search">
                                     <form onSubmit={search} className="form-inline">
                                         <input className="form-control mr-sm-2" onChange={(e) => setProduitSearch(e.target.value)} value={produitSearch} type="text" placeholder="Rechercher un produit..." aria-label="Search" required />
-                                        <button className="btn my-2 my-sm-0 btn-search" type="submit">Rechercher</button>
+                                        <button className="btn my-2 my-sm-0" type="submit">Rechercher</button>
                                     </form>
                                 </div>
                                 {/* <div className="col-2 top_nav_right text-center mt-sm-0 mt-2">

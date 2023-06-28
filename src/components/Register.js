@@ -1,48 +1,49 @@
 import React from "react";
-import axios from 'axios';
 import { useState, useContext } from 'react';
 import Auth from "../contexts/Auth";
+import { register } from "../services/AuthApi";
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-    const [nom, setNom] = useState('');
-    const [prenom, setPrenom] = useState('');
-    const [naissance, setNaissance] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPass, setConfirmPass] = useState('');
-    const [telephone, setTelephone] = useState('');
     const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
+    let { navigate } = useNavigate();
+    const [user, setUser] = useState({
+        nom: '',
+        prenom: '',
+        email: '',
+        date_naissance: '',
+        password: '',
+        cpassword: '',
+        telephone: ''
+    })
 
-    const handleSubmit = (e) => {
+    const handleChange = ({currentTarget}) => {
+        const {name, value} = currentTarget;
+        setUser({...user, [name]: value})
+    }
+    const handleSubmit = async e => {
         e.preventDefault()
         
-        if (password !== confirmPass && !error) {
-            setError(true);
-        } else {
-            axios
-                .post('http://localhost:8000/api/register', {
-                    nom: nom,
-                    prenom: prenom,
-                    date_naissance: naissance,
-                    email: email,
-                    password: password,
-                    telephone: telephone
-                })
-                .then((res) => {
-                    console.log(res);
-                    setNom('');
-                    setPrenom('');
-                    setNaissance('');
-                    setEmail('');
-                    setPassword('');
-                    setTelephone('');
-                })
-                .catch((res) => {
-                    setError(true);
-                    console.log(res)
-                })
-            ;
+        try {
+            if (user.password !== user.cpassword) {
+                setError(true)
+                setErrorMessage('Les mots de passe ne correspondent pas')
+            } else {
+                if (user.password.length >= 8) {
+                    const response = await register(user);
+                    setIsAuthenticated(response);
+                    console.log(response);
+                    navigate('/home');
+                } else {
+                    setError(true)
+                    setErrorMessage('Le mot de passe doit avoir au moins 8 caracteres.')
+                }
+            }
+        } catch ({ response }) {
+            setError(true)
+            setErrorMessage(response)
         }
     }
     
@@ -60,31 +61,31 @@ const Register = () => {
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label className="col-form-label">Nom*</label>
-                                <input type="text" onChange={(e) => setNom(e.target.value)} className="form-control" required />
+                                <input type="text" onChange={handleChange} name='nom' className="form-control" required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label">Prénom*</label>
-                                <input type="text" onChange={(e) => setPrenom(e.target.value)} className="form-control" required />
+                                <input type="text" onChange={handleChange} name='prenom' className="form-control" required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label">Email*</label>
-                                <input type="email" onChange={(e) => setEmail(e.target.value)} className="form-control" required />
+                                <input type="email" onChange={handleChange} name='email' className="form-control" required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label">Telephone</label>
-                                <input type="text" onChange={(e) => setTelephone(e.target.value)} className="form-control" />
+                                <input type="text" onChange={handleChange} name='telephone' className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label">Date de naissance</label>
-                                <input type="date" onChange={(e) => setNaissance(e.target.value)} className="form-control" />
+                                <input type="date" onChange={handleChange} name='date_naissance' className="form-control" />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label">Password*</label>
-                                <input type="password" onChange={(e) => setPassword(e.target.value)} className="form-control" required />
+                                <input type="password" onChange={handleChange} name='password' className="form-control" required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label">Confirmer le Password*</label>
-                                <input type="password" onChange={(e) => setConfirmPass(e.target.value)} className="form-control" required />
+                                <input type="password" onChange={handleChange} name='cpassword' className="form-control" required />
                             </div>
                             <div className="sub-w3l">
                                 <div className="custom-control custom-checkbox mr-sm-2">
@@ -92,6 +93,7 @@ const Register = () => {
                                     <label className="custom-control-label" for="customControlAutosizing2">J'accepte les Termes & Conditions de OnCheck</label>
                                 </div>
                             </div>
+                            {error && <span className='text-align bold text-danger'>{errorMessage}</span>}
                             <div className="right-w3l">
                                 <input type="submit" className="form-control" value="S'inscrire" />
                             </div>

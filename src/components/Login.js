@@ -1,33 +1,36 @@
 import React, { useContext } from "react";
 //import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Auth from "../contexts/Auth";
 import { login } from "../services/AuthApi";
+import { useNavigate } from 'react-router-dom';
 
-const Login = ({ history }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+const Login = () => {
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
+    let { navigate } = useNavigate();
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    })
 
+    const handleChange = ({currentTarget}) => {
+        const {name, value} = currentTarget;
+        setUser({...user, [name]: value})
+    }
     const handleSubmit = async e => {
         e.preventDefault()
-        const data = [email, password];
-        console.log(data)
-
+        
         try {
-            const response = await login(data);
+            const response = await login(user);
             setIsAuthenticated(response);
-            history.replace('/profile');
+            navigate('/profile');
         } catch ({ response }) {
-            console.log(response)
+            setError(true)
+            setErrorMessage(response)
         }
     }
-
-    useEffect(() => {
-        if (isAuthenticated) {
-           history.replace('/profile'); 
-        }
-    }, [history, isAuthenticated])
 
     return (
         <div className="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-hidden="true">
@@ -43,11 +46,11 @@ const Login = ({ history }) => {
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label className="col-form-label">Email</label>
-                                <input type="text" className="form-control" onChange={(e) => setEmail(e.target.value)} required />
+                                <input type="text" className="form-control" onChange={handleChange} name='email' required />
                             </div>
                             <div className="form-group">
                                 <label className="col-form-label">Password</label>
-                                <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} required />
+                                <input type="password" className="form-control" onChange={handleChange} name='password' required />
                             </div>
                             <div className="sub-w3l">
                                 <div className="custom-control custom-checkbox mr-sm-2">
@@ -55,6 +58,7 @@ const Login = ({ history }) => {
                                     <label className="custom-control-label" for="customControlAutosizing">Se souvenir de moi ?</label>
                                 </div>
                             </div>
+                            {error && <span className='text-align bold text-danger'>{errorMessage}</span>}
                             <div className="right-w3l">
                                 <input type="submit" className="form-control" value="Se connecter" />
                             </div>

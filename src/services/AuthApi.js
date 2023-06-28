@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios";
 import jwtDecode from 'jwt-decode';
 import { getItem, addItem, removeItem } from "./LocalStorage";
 
@@ -15,16 +15,23 @@ export function hasAuthenticated() {
 
 export function login(credentials) {
     return axios
-        .post('http://localhost:8000/api/login', credentials)
-        .then(response => response.data.token)
-        .then(token => {
-            addItem('oncheckToken', token);
+        .post('/login', credentials)
+        .then(res => {
+            addItem('oncheckToken', res.data.token)
+            addItem('oncheckUser', JSON.stringify(res.data.user))
             return true;
         })
 }
 
+export function register(credentials) {
+    return axios
+        .post('/register', credentials)
+        .then(response => response.data)
+}
+
 export function logout() {
     removeItem('oncheckToken');
+    removeItem('oncheckUser');
 }
 
 function tokenIsValid(token) {

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import Auth from '../contexts/Auth';
 import { Route } from "react-router-dom";
-//import Redirect from 'react';
 import Home from "../pages/Home";
 
 const AuthenticatedRoute = ({ path, element }) => {

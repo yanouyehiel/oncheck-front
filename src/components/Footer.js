@@ -143,9 +143,13 @@ const Footer = () => {
                                     <li class="mb-3">
                                         <i class="fas fa-map-marker"></i> PK8 Derrière ESG Douala, CAMEROUN.</li>
                                     <li class="mb-3">
-                                        <i class="fas fa-phone"></i> +(237) 694 750 509 </li>
+                                        <i class="fas fa-phone"></i>
+                                        <a href="tel:+237694750509"> +(237) 694 750 509</a>
+                                    </li>
                                     <li class="mb-3">
-                                        <i class="fab fa-whatsapp"></i> +(237) 672 155 866 </li>
+                                        <i class="fab fa-whatsapp"></i> 
+                                        <a href="https://wa.me/237672155866" target='_blank' rel="noreferrer"> +(237) 672 155 866</a>
+                                    </li>
                                     <li class="mb-3">
                                         <i class="fas fa-envelope-open"></i>
                                         <a href="mailto:mail@oncheckcm.com"> mail@oncheckcm.com</a>
