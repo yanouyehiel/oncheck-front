@@ -14,3 +14,12 @@ export function dateParser(date) {
 
     return newDate;
 }
+
+export function longueurTexte(word) {
+    let sentence = new String(word)
+    if (sentence.length > 15) {
+        return sentence.substring(0, 16) + '...'
+    } else {
+        return sentence
+    }
+}

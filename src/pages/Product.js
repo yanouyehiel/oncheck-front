@@ -18,6 +18,7 @@ const Product = () => {
     const [produit, setProduit] = useState({})
     const [categorie, setCategorie] = useState('')
     const [produitsCompares, setProduitsCompares] = useState([])
+    let produits = [{}]
     const [chartData, setChartData] = useState({
         labels: Data.map((data) => data.year),
         datasets: [
@@ -75,6 +76,8 @@ const Product = () => {
                 setCategorie(res.data)
             }
         );
+
+        return categorie;
     }
 
     const alerteSubmit = (e) => {
@@ -103,6 +106,11 @@ const Product = () => {
             .get('http://localhost:8000/api/produits-categorie/' + id
             )
             .then((res) => {
+                res.data.map(data => {
+                    data.image_1: produits.image,
+                    data.livraison: data.livraison === 1 ? "Oui" : "Non",
+                    data.categorie: nameCategory(data.categorie)
+                })
                 setProduitsCompares(res.data)
             }
         );
@@ -136,24 +144,24 @@ const Product = () => {
                             <div class="grid images_3_of_2">
                                 <div class="flexslider">
                                     <ul class="slides">
-                                        <li data-thumb="images/image_1">
+                                        <li data-thumb={"assets/images/" +produit.image_1}>
                                             <div class="thumb-image">
-                                                <img src={produit.image_1} data-imagezoom="true" class="img-fluid" alt={produit.image_1} /> </div>
+                                                <img src={"assets/images/" + produit.image_1} data-imagezoom="true" class="img-fluid" alt={produit.image_1} /> </div>
                                         </li>
-                                        <li data-thumb="images/image_2">
+                                        <li data-thumb={"assets/images/" +produit.image_2}>
                                             <div class="thumb-image">
                                                 {
                                                     produit.image_2 && (
-                                                        <img src={produit.image_2} data-imagezoom="true" class="img-fluid" alt={produit.image_2} />
+                                                        <img src={"assets/images/" +produit.image_2} data-imagezoom="true" class="img-fluid" alt={produit.image_2} />
                                                     )
                                                 }
                                             </div>
                                         </li>
-                                        <li data-thumb="images/image_3">
+                                        <li data-thumb={"assets/images/" +produit.image_3}>
                                             <div class="thumb-image">
                                                 {
                                                     produit.image_3 && (
-                                                        <img src={produit.image_3} data-imagezoom="true" class="img-fluid" alt={produit.image_3} />
+                                                        <img src={"assets/images/" +produit.image_3} data-imagezoom="true" class="img-fluid" alt={produit.image_3} />
                                                     )
                                                 }
                                             </div>

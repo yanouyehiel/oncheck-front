@@ -1,19 +1,22 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import FilterSide from "../components/FilterSide";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
-//import { ColorRing, CirclesWithBar, Bars } from "react-loader-spinner";
+import { ColorRing, CirclesWithBar, Bars } from "react-loader-spinner";
 
 const Home = () => {
     const [mobilePhones, setMobilePhones] = useState([])
     const [laptops, setLaptops] = useState([])
     const [ecrans, setEcrans] = useState([])
     const [playOne, setPlayOne] = useState(true)
-    //const [rangeValue, setRangeValue] = useState(40);
-    //const [sortedData, setSortedData] = useState([]);
+    const [rangeValue, setRangeValue] = useState(1000);
+    const [selectedRadioReduction, setSelectedRadioReduction] = useState('');
+    const [selectedRadioCategorie, setSelectedRadioCategorie] = useState('');
+    const [selectedRadioLivraison, setSelectedRadioLivraison] = useState('');
+    const [selectedRadioNewProduit, setSelectedRadioNewProduit] = useState('');
     
     useEffect(() => {
         if (playOne) {
@@ -21,7 +24,8 @@ const Home = () => {
                 .get('http://localhost:8000/api/produits-categorie/62'
                 )
                 .then((res) => {
-                    setMobilePhones(res.data.data);
+                    console.log(mobilePhones)
+                    setMobilePhones(res.data);
                     setPlayOne(false);
                 }
             );
@@ -29,7 +33,7 @@ const Home = () => {
                 .get('http://localhost:8000/api/produits-categorie/1'
                 )
                 .then((res) => {
-                    setLaptops(res.data.data);
+                    setLaptops(res.data);
                     setPlayOne(false);
                 }
             );
@@ -37,7 +41,7 @@ const Home = () => {
                 .get('http://localhost:8000/api/produits-categorie/6'
                 )
                 .then((res) => {
-                    setEcrans(res.data.data);
+                    setEcrans(res.data);
                     setPlayOne(false);
                 }
             );
@@ -164,16 +168,20 @@ const Home = () => {
                                             }
                                         </Suspense> */}
                                         {mobilePhones
-                                            .map((phone) => (
+                                            .map((phone) => 
+                                            (!selectedRadioReduction || selectedRadioReduction === phone.reduction) &&
+                                            (!selectedRadioCategorie || selectedRadioCategorie === phone.categorie) &&
+                                            (!selectedRadioLivraison || selectedRadioLivraison === phone.livraison) ?
+                                            (
                                                 <Card key={phone.id} produit={phone} />
-                                            ))
+                                            ) : null)
                                         }
 									</div>
 								</div>
 								<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
 									<h3 class="heading-tittle text-center font-italic">Ordinateurs portables</h3>
 									<div class="row">
-                                        {/* <Suspense fallback={<CirclesWithBar
+                                        <Suspense fallback={<CirclesWithBar
                                             height="100"
                                             width="100"
                                             color="#4fa94d"
@@ -191,12 +199,12 @@ const Home = () => {
                                                     <Card key={laptop.id} produit={laptop} />
                                                 ))
                                             }
-                                        </Suspense> */}
-                                        {laptops
+                                        </Suspense>
+                                        {/* {laptops
                                             .map((laptop) => (
                                                 <Card key={laptop.id} produit={laptop} />
                                             ))
-                                        }
+                                        } */}
 									</div>
 								</div>
                                 <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
@@ -242,7 +250,16 @@ const Home = () => {
 							</div>
 						</div>
                 
-						<FilterSide />
+						<FilterSide
+                            selectedRadioReduction={selectedRadioReduction}
+                            setSelectedRadioReduction={setSelectedRadioReduction}
+                            selectedRadioCategorie={selectedRadioCategorie}
+                            setSelectedRadioCategorie={setSelectedRadioCategorie}
+                            selectedRadioLivraison={selectedRadioLivraison}
+                            setSelectedRadioLivraison={setSelectedRadioLivraison}
+                            selectedRadioNewProduit={selectedRadioNewProduit}
+                            setSelectedRadioNewProduit={setSelectedRadioNewProduit}
+                        />
                 	</div>
                 </div>
             </div>

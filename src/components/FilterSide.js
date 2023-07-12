@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-const FilterSide = () => {
+const FilterSide = (props) => {
     const [rangeValue, setRangeValue] = useState(1000);
-    const [selectedRadioReduction, setSelectedRadioReduction] = useState('');
-    const [selectedRadioCategorie, setSelectedRadioCategorie] = useState('');
-    const [selectedRadioLivraison, setSelectedRadioLivraison] = useState('');
-    const [selectedRadioNewProduit, setSelectedRadioNewProduit] = useState('');
+    const [productsMostCompared, setProductsMostCompared] = useState([])
 
     const radiosReduction = ["5", "10", "20", "30", "50", "60"];
     const radiosCategorie = ["Electroménager", "Intérieur & Design", "Electronique", "Mode", "Alimentation", "Beauté & Santé"];
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:8000/api/produits-categorie/62'
+            )
+            .then((res) => {
+                setProductsMostCompared(res.data);
+            }
+        );
+    }, [])
 
     return(
         <div className="col-lg-3 mt-lg-0 mt-4 p-lg-0">
@@ -30,13 +38,13 @@ const FilterSide = () => {
                 </div>
                 <div className="cancel border-bottom py-2">
                     {
-                        (selectedRadioReduction || selectedRadioCategorie || selectedRadioLivraison || selectedRadioNewProduit) 
+                        (props.selectedRadioReduction || props.selectedRadioCategorie || props.selectedRadioLivraison || props.selectedRadioNewProduit) 
                         && <h5 onClick={() => 
                             [
-                                setSelectedRadioReduction(""), 
-                                setSelectedRadioCategorie(""),
-                                setSelectedRadioLivraison(""),
-                                setSelectedRadioNewProduit("")
+                                props.setSelectedRadioReduction(""), 
+                                props.setSelectedRadioCategorie(""),
+                                props.setSelectedRadioLivraison(""),
+                                props.setSelectedRadioNewProduit("")
                             ]
                         }>Annuler le filtre</h5>
                     }
@@ -51,8 +59,8 @@ const FilterSide = () => {
                                         value={radio}
                                         className="checked"
                                         id={radio} 
-                                        checked={radio === selectedRadioReduction} 
-                                        onChange={(e) => setSelectedRadioReduction(e.target.value)} 
+                                        checked={radio === props.selectedRadioReduction} 
+                                        onChange={(e) => props.setSelectedRadioReduction(e.target.value)} 
                                     />
                                     <span className="span">Moins de {radio}%</span>
                                 </li>
@@ -70,8 +78,8 @@ const FilterSide = () => {
                                         value={radio}
                                         className="checked"
                                         id={radio} 
-                                        checked={radio === selectedRadioCategorie} 
-                                        onChange={(e) => setSelectedRadioCategorie(e.target.value)} 
+                                        checked={radio === props.selectedRadioCategorie} 
+                                        onChange={(e) => props.setSelectedRadioCategorie(e.target.value)} 
                                     />
                                     <span className="span">{radio}</span>
                                 </li>
@@ -83,11 +91,19 @@ const FilterSide = () => {
                     <h3 className="agileits-sear-head mb-3">Livraison disponible</h3>
                     <ul>
                         <li>
-                            <input type="radio" className="checked" />
+                            <input type="radio" 
+                                className="checked"
+                                value={props.selectedRadioLivraison} 
+                                onChange={(e) => props.setSelectedRadioLivraison(e.target.value)}
+                            />
                             <span className="span">Oui</span>
                         </li>
                         <li>
-                            <input type="radio" className="checked" />
+                            <input type="radio" 
+                                className="checked"
+                                value={props.selectedRadioLivraison} 
+                                onChange={(e) => props.setSelectedRadioLivraison(e.target.value)}
+                            />
                             <span className="span">Non</span>
                         </li>
                     </ul>
@@ -113,33 +129,20 @@ const FilterSide = () => {
                     <h3 className="agileits-sear-head mb-3">Produits les plus comparés</h3>
                     <div className="box-scroll">
                         <div className="scroll">
-                            <div className="row">
-                                <div className="col-lg-3 col-sm-2 col-3 left-mar">
-                                    <img src="images/k1.jpg" alt="" className="img-fluid" />
+                            {productsMostCompared.slice(0, 10).map((product, item) => (
+                                <div key={item} className={(item % 2 === 0) ? "row" : "row my-4"}>
+                                    <div className="col-lg-3 col-sm-2 col-3 left-mar">
+                                        {"assets/images/" + product.image_1 ?
+                                            <img src={"assets/images/" + product.image_1} alt={product.image_1} className="img-fluid" />
+                                            : <img src="assets/images/noimage.jpg" alt={product.image_1} className="img-fluid" />
+                                        }
+                                    </div>
+                                    <div className="col-lg-9 col-sm-10 col-9 w3_mvd">
+                                        <NavLink to={"product/" + product.id}>{product.nom}</NavLink>
+                                        <p className="price-mar mt-2">{product.prix} FCFA</p>
+                                    </div>
                                 </div>
-                                <div className="col-lg-9 col-sm-10 col-9 w3_mvd">
-                                    <NavLink>Samsung Galaxy On7 Prime (Gold, 4GB RAM + 64GB Memory)</NavLink>
-                                    <p className="price-mar mt-2">$12,990.00</p>
-                                </div>
-                            </div>
-                            <div className="row my-4">
-                                <div className="col-lg-3 col-sm-2 col-3 left-mar">
-                                    <img src="images/k2.jpg" alt="" className="img-fluid" />
-                                </div>
-                                <div className="col-lg-9 col-sm-10 col-9 w3_mvd">
-                                    <NavLink>Haier 195 L 4 Star Direct-Cool Single Door Refrigerator</NavLink>
-                                    <p className="price-mar mt-2">$12,499.00</p>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-3 col-sm-2 col-3 left-mar">
-                                    <img src="images/k3.jpg" alt="" className="img-fluid" />
-                                </div>
-                                <div className="col-lg-9 col-sm-10 col-9 w3_mvd">
-                                    <NavLink>Ambrane 13000 mAh Power Bank (P-1310 Premium)</NavLink>
-                                    <p className="price-mar mt-2">$1,199.00 </p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
