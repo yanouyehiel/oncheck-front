@@ -62,6 +62,23 @@ const Login = () => {
                             <div className="right-w3l">
                                 <input type="submit" className="form-control" value="Se connecter" />
                             </div>
+                            <div class="footer-grids w3l-socialmk mt-3">
+                                <h3 class="font-weight-bold mb-3">Se connecter avec</h3>
+                                <div class="social">
+                                    <ul>
+                                        <li>
+                                            <a class="icon fb" href="https://www.facebook.com/OnCheck-Comparateur-de-prix-108506331692864/?ref=page_internal">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="icon gg" href="https://www.linkedin.com/company/oncheck/">
+                                                <i class="fab fa-google"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

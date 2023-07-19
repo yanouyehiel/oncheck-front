@@ -37,8 +37,7 @@ const Product = () => {
             }
         ]
     })
-    const columns = useMemo(
-    () => [
+    const columns = useMemo(() => [
       {
         accessorKey: 'nom', //access nested data with dot notation
         header: 'Nom du produit',
@@ -107,9 +106,9 @@ const Product = () => {
             )
             .then((res) => {
                 res.data.map(data => {
-                    data.image_1: produits.image,
+                    /*data.image_1: produits.image,
                     data.livraison: data.livraison === 1 ? "Oui" : "Non",
-                    data.categorie: nameCategory(data.categorie)
+                    data.categorie: nameCategory(data.categorie)*/
                 })
                 setProduitsCompares(res.data)
             }
